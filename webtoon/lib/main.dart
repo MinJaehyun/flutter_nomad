@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+
+import 'package:webtoon/screens/detail_screen.dart';
 import 'package:webtoon/screens/home_screen.dart';
 
 void main() {
@@ -16,7 +18,9 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: HomeScreen(),
+      // home: DetailScreen(),
     );
   }
 }
