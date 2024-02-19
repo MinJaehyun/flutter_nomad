@@ -25,8 +25,7 @@ class ApiService {
   // note: getNowPlaying
   static Future<List<NowPlayingModel>> getNowPlaying() async {
     List<NowPlayingModel> nowPlayingList = [];
-    final url =
-        Uri.parse('https://movies-api.nomadcoders.workers.dev/now-playing');
+    final url = Uri.parse('https://movies-api.nomadcoders.workers.dev/now-playing');
     final response = await http.get(url);
     if (response.statusCode == 200) {
       final nowPlaying = jsonDecode(response.body);
@@ -43,8 +42,7 @@ class ApiService {
   // note: getComingSoonModel
   static Future<List<ComingSoonModel>> getComingSoon() async {
     List<ComingSoonModel> comingMovieInstances = [];
-    final url =
-        Uri.parse('https://movies-api.nomadcoders.workers.dev/coming-soon');
+    final url = Uri.parse('https://movies-api.nomadcoders.workers.dev/coming-soon');
     final response = await http.get(url);
 
     if (response.statusCode == 200) {
@@ -62,8 +60,7 @@ class ApiService {
   // note: getDetailInfo(id)
   static Future<DetailInfoModel> getDetailInfo(id) async {
     late DetailInfoModel detailInfo;
-    final url =
-        Uri.parse('https://movies-api.nomadcoders.workers.dev/movie?id=$id');
+    final url = Uri.parse('https://movies-api.nomadcoders.workers.dev/movie?id=$id');
     final response = await http.get(url);
     if (response.statusCode == 200) {
       final Map<String, dynamic> jsonData = jsonDecode(response.body);

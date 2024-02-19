@@ -7,10 +7,8 @@ import 'package:webtoon/services/api_service.dart';
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
 
-  final Future<List<PopularMovieModel>> popularMovies =
-      ApiService.getPopularMovies();
-  final Future<List<NowPlayingModel>> nowPlayingMovies =
-      ApiService.getNowPlaying();
+  final Future<List<PopularMovieModel>> popularMovies = ApiService.getPopularMovies();
+  final Future<List<NowPlayingModel>> nowPlayingMovies = ApiService.getNowPlaying();
   final Future<List<ComingSoonModel>> comingSoon = ApiService.getComingSoon();
 
   @override
@@ -103,18 +101,11 @@ class HomeScreen extends StatelessWidget {
                   children: [
                     Expanded(
                       child: GestureDetector(
-                        onTap: () => Navigator.of(context).push(
-                            MaterialPageRoute(
-                                builder: (_) => DetailScreen(
-                                    id: '${snapshot.data![index].id}'))),
-                        child: Image.network(
-                            'https://image.tmdb.org/t/p/w500/${snapshot.data![index].posterPath}'),
+                        onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => DetailScreen(id: '${snapshot.data![index].id}'))),
+                        child: Image.network('https://image.tmdb.org/t/p/w500/${snapshot.data![index].posterPath}'),
                       ),
                     ),
-                    Text('${snapshot.data![index].title}',
-                        style: TextStyle(
-                            fontWeight: FontWeight.w600,
-                            color: Colors.black.withOpacity(0.6))),
+                    Text('${snapshot.data![index].title}', style: TextStyle(fontWeight: FontWeight.w600, color: Colors.black.withOpacity(0.6))),
                   ],
                 ),
               );
@@ -155,12 +146,8 @@ class HomeScreen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(15),
                         ),
                         child: GestureDetector(
-                          onTap: () => Navigator.of(context).push(
-                              MaterialPageRoute(
-                                  builder: (_) => DetailScreen(
-                                      id: '${snapshot.data![index].id}'))),
-                          child: Image.network(
-                              'https://image.tmdb.org/t/p/w500/${snapshot.data![index].posterPath}'),
+                          onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => DetailScreen(id: '${snapshot.data![index].id}'))),
+                          child: Image.network('https://image.tmdb.org/t/p/w500/${snapshot.data![index].posterPath}'),
                         ),
                       ),
                     ),
@@ -208,16 +195,11 @@ class HomeScreen extends StatelessWidget {
                 return Container(
                   width: 280,
                   clipBehavior: Clip.hardEdge,
-                  decoration:
-                      BoxDecoration(borderRadius: BorderRadius.circular(15)),
+                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(15)),
                   // note: 이미지 꽉 채우기 - fit: BoxFit.fill
                   child: GestureDetector(
-                    onTap: () => Navigator.of(context).push(MaterialPageRoute(
-                        builder: (_) =>
-                            DetailScreen(id: '${snapshot.data![index].id}'))),
-                    child: Image.network(
-                        'https://image.tmdb.org/t/p/w500/${snapshot.data![index].posterPath}',
-                        fit: BoxFit.fill),
+                    onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => DetailScreen(id: '${snapshot.data![index].id}'))),
+                    child: Image.network('https://image.tmdb.org/t/p/w500/${snapshot.data![index].posterPath}', fit: BoxFit.fill),
                   ),
                 );
               }

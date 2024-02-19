@@ -26,13 +26,7 @@ class ComingSoonModel {
 
 class DetailInfoModel {
   // id, 이미지, 제목, 상영 시간 runtime, 제작사는 여러개 production_companies 내 [index] 내 [name] , 스토리라인 overview, vote_average: 별정
-  final dynamic id,
-      posterPath,
-      originalTitle,
-      runtime,
-      productionCompanies,
-      overview,
-      voteAverage;
+  final dynamic id, posterPath, originalTitle, runtime, productionCompanies, overview, voteAverage;
 
   DetailInfoModel.fromJson(Map<String, dynamic> json)
       : id = json['id'],
