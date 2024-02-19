@@ -36,7 +36,7 @@
 - [x] const 추가 - VSCode 저장 시, 자동 추가 기능 적용하고, 모든 파일 적용하기
 - [x] Container 대신 SizedBox 적용하여 개선
 - [x] 모델 내 annotation 설정, camelcase로 변수명 개선
-- [ ] 폰트 수정
+- [x] 폰트 기능 추가 
 - [ ] title이 thumb 영역 벗어나면 자동 줄바꿈하도록 개선하기
 - [ ] 종류, title - 공통적으로 반복하는 style을 main에 작성하기
 - [ ] page 이동 시, Hero 위젯 사용하기
