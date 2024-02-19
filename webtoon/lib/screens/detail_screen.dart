@@ -79,106 +79,101 @@ class _DetailScreenState extends State<DetailScreen> {
             productionCompanies += '${item['name']}, \n';
           }
 
-          return ListView(
+          return Stack(
             children: [
-              // note: 배경이미지 전체 채우기 - 이미지 높이 설정 후, BoxFit.cover 설정
-              Stack(
-                children: [
-                  Positioned(
-                    child: Container(
-                      height: 800,
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                          image: NetworkImage(
-                            'https://image.tmdb.org/t/p/w500/${snapshotData!.posterPath}',
-                          ),
-                          fit: BoxFit.cover,
-                        ),
+              Positioned(
+                child: Container(
+                  height: screenSize.height,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: NetworkImage(
+                        'https://image.tmdb.org/t/p/w500/${snapshotData!.posterPath}',
                       ),
+                      fit: BoxFit.cover,
                     ),
                   ),
-                  Positioned(
-                    top: topPosition * 0.2,
-                    left: leftPosition * 0.05,
-                    child:
-                        Text('${snapshotData.originalTitle}', style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 35)),
+                ),
+              ),
+              Positioned(
+                top: topPosition * 0.2,
+                left: leftPosition * 0.05,
+                child:
+                    Text('${snapshotData.originalTitle}', style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 35)),
+              ),
+              // note: rating 기능
+              Positioned(
+                top: topPosition * 0.27,
+                left: leftPosition * 0.03,
+                child: RatingBar.builder(
+                  // print(snapshotData.vote_average.runtimeType); // double: 5.473
+                  // note: 별점 10 만점 기준, (5,473 / 2)는 2이므로 별둘, (1: 별하나, 2:별둘, 3:별셋, 4:별넷 else: 별다섯)
+                  initialRating: showAverage,
+                  minRating: 1,
+                  direction: Axis.horizontal,
+                  allowHalfRating: true,
+                  itemCount: 5,
+                  itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
+                  itemBuilder: (context, _) => const Icon(
+                    Icons.star,
+                    color: Colors.amber,
                   ),
-                  // note: rating 기능
-                  Positioned(
-                    top: topPosition * 0.27,
-                    left: leftPosition * 0.03,
-                    child: RatingBar.builder(
-                      // print(snapshotData.vote_average.runtimeType); // double: 5.473
-                      // note: 별점 10 만점 기준, (5,473 / 2)는 2이므로 별둘, (1: 별하나, 2:별둘, 3:별셋, 4:별넷 else: 별다섯)
-                      initialRating: showAverage,
-                      minRating: 1,
-                      direction: Axis.horizontal,
-                      allowHalfRating: true,
-                      itemCount: 5,
-                      itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
-                      itemBuilder: (context, _) => const Icon(
-                        Icons.star,
-                        color: Colors.amber,
+                  onRatingUpdate: (rating) {
+                    debugPrint(rating as String?);
+                  },
+                ),
+              ),
+              Positioned(
+                top: topPosition * 0.35,
+                left: leftPosition * 0.05,
+                child: Row(
+                  children: [
+                    Text(
+                      '${runTimeHour}h ${runTimeMin}min',
+                      style: TextStyle(fontWeight: FontWeight.w600, color: Colors.white.withOpacity(0.6), fontSize: 15),
+                    ),
+                    const SizedBox(width: 20),
+                    Text(productionCompanies, style: TextStyle(color: Colors.white.withOpacity(0.6), fontSize: 15), maxLines: 13),
+                  ],
+                ),
+              ),
+              Positioned(
+                top: topPosition * 0.46,
+                left: leftPosition * 0.05,
+                child: const Text(
+                  'Storyline',
+                  style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white, fontSize: 30),
+                ),
+              ),
+              Positioned(
+                top: topPosition * 0.52,
+                left: leftPosition * 0.05,
+                child: SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.9,
+                  child: Text('${snapshotData.overview}', style: const TextStyle(color: Colors.white, fontSize: 18)),
+                ),
+              ),
+              Positioned(
+                bottom: topPosition * 0.05,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 130),
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.yellow,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
                       ),
-                      onRatingUpdate: (rating) {
-                        debugPrint(rating as String?);
-                      },
+                      // error: 사이즈 조정 안되는 이유?
+                      // maximumSize: const Size(100, 35),
                     ),
-                  ),
-                  Positioned(
-                    top: topPosition * 0.35,
-                    left: leftPosition * 0.05,
-                    child: Row(
-                      children: [
-                        Text(
-                          '${runTimeHour}h ${runTimeMin}min',
-                          style: TextStyle(fontWeight: FontWeight.w600, color: Colors.white.withOpacity(0.6), fontSize: 15),
-                        ),
-                        const SizedBox(width: 20),
-                        Text(productionCompanies, style: TextStyle(color: Colors.white.withOpacity(0.6), fontSize: 15), maxLines: 13),
-                      ],
-                    ),
-                  ),
-                  Positioned(
-                    top: topPosition * 0.46,
-                    left: leftPosition * 0.05,
+                    onPressed: () {
+                      // todo: 추후, 클릭 시, inapp 결제하기
+                    },
                     child: const Text(
-                      'Storyline',
-                      style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white, fontSize: 30),
+                      'Buy ticket',
+                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                     ),
                   ),
-                  Positioned(
-                    top: topPosition * 0.52,
-                    left: leftPosition * 0.05,
-                    child: SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.9,
-                      child: Text('${snapshotData.overview}', style: const TextStyle(color: Colors.white, fontSize: 18)),
-                    ),
-                  ),
-                  Positioned(
-                    bottom: topPosition * 0.05,
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 130),
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.yellow,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          // error: 사이즈 조정 안되는 이유?
-                          // maximumSize: const Size(100, 35),
-                        ),
-                        onPressed: () {
-                          // todo: 추후, 클릭 시, inapp 결제하기
-                        },
-                        child: const Text(
-                          'Buy ticket',
-                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
+                ),
               ),
             ],
           );
