@@ -26,6 +26,11 @@ class _DetailScreenState extends State<DetailScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final screenSize = MediaQuery.of(context).size;
+    // 화면 너비와 높이에 따라 자동으로 위치를 계산
+    final double topPosition = screenSize.height; // 화면 높이의 20% 위치에 배치
+    final double leftPosition = screenSize.width; // 화면 너비의 20% 위치에 배치
+
     return Scaffold(
       appBar: AppBar(title: const Text('Back to list')),
       body: FutureBuilder(
@@ -37,7 +42,7 @@ class _DetailScreenState extends State<DetailScreen> {
           }
 
           final snapshotData = snapshot.data!;
-          final average = snapshotData.vote_average / 2;
+          final average = snapshotData.voteAverage / 2;
           late double showAverage = 0;
 
           // note:
@@ -69,28 +74,27 @@ class _DetailScreenState extends State<DetailScreen> {
 
           // note:
           String productionCompanies = '';
-          for (var item in snapshotData.production_companies) {
+          for (var item in snapshotData.productionCompanies) {
             productionCompanies += '${item['name']}, \n';
           }
 
-          return ListView.separated(
+          return ListView.builder(
             itemCount: 1,
-            separatorBuilder: (context, index) {
-              return const SizedBox(width: 20);
-            },
             itemBuilder: (context, index) {
               // note: 배경이미지 전체 채우기 - 이미지 높이 설정 후, BoxFit.cover 설정
               return Stack(
                 // final original_title, popularity, runtime, production_companies, overview;
                 children: [
-                  Image.network('https://image.tmdb.org/t/p/w500/${snapshotData!.poster_path}', fit: BoxFit.cover, height: 730),
+                  Image.network('https://image.tmdb.org/t/p/w500/${snapshotData!.posterPath}', fit: BoxFit.cover, height: 730),
                   Positioned(
-                    top: 200,
-                    child: Text('${snapshotData.original_title}', style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 35)),
+                    top: topPosition * 0.2,
+                    left: leftPosition * 0.05,
+                    child: Text('${snapshotData.originalTitle}', style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 35)),
                   ),
                   // note: rating 기능
                   Positioned(
-                    top: 255,
+                    top: topPosition * 0.27,
+                    left: leftPosition * 0.03,
                     child: RatingBar.builder(
                       // print(snapshotData.vote_average.runtimeType); // double: 5.473
                       // note: 별점 10 만점 기준, (5,473 / 2)는 2이므로 별둘, (1: 별하나, 2:별둘, 3:별셋, 4:별넷 else: 별다섯)
@@ -110,7 +114,8 @@ class _DetailScreenState extends State<DetailScreen> {
                     ),
                   ),
                   Positioned(
-                    top: 300,
+                    top: topPosition * 0.35,
+                    left: leftPosition * 0.05,
                     child: Row(
                       children: [
                         Text(
@@ -122,22 +127,24 @@ class _DetailScreenState extends State<DetailScreen> {
                       ],
                     ),
                   ),
-                  const Positioned(
-                    top: 420,
-                    child: Text(
+                  Positioned(
+                    top: topPosition * 0.46,
+                    left: leftPosition * 0.05,
+                    child: const Text(
                       'Storyline',
                       style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white, fontSize: 30),
                     ),
                   ),
                   Positioned(
-                    top: 470,
+                    top: topPosition * 0.52,
+                    left: leftPosition * 0.05,
                     child: SizedBox(
                       width: MediaQuery.of(context).size.width * 0.9,
                       child: Text('${snapshotData.overview}', style: const TextStyle(color: Colors.white, fontSize: 18)),
                     ),
                   ),
                   Positioned(
-                    bottom: 50,
+                    bottom: topPosition * 0.05,
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 130),
                       child: ElevatedButton(
@@ -147,7 +154,7 @@ class _DetailScreenState extends State<DetailScreen> {
                             borderRadius: BorderRadius.circular(8),
                           ),
                           // error: 사이즈 조정 안되는 이유?
-                          // maximumSize: Size(100, 35),
+                          // maximumSize: const Size(100, 35),
                         ),
                         onPressed: () {
                           // todo: 추후, 클릭 시, inapp 결제하기

@@ -151,11 +151,15 @@ class HomeScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-                    Text(
-                      '${snapshot.data![index].title}',
-                      style: TextStyle(
-                        fontWeight: FontWeight.w600,
-                        color: Colors.black.withOpacity(0.6),
+                    SizedBox(
+                      width: 100,
+                      child: Text(
+                        overflow: TextOverflow.ellipsis,
+                        '${snapshot.data![index].title}',
+                        style: TextStyle(
+                          fontWeight: FontWeight.w600,
+                          color: Colors.black.withOpacity(0.6),
+                        ),
                       ),
                     ),
                   ],
