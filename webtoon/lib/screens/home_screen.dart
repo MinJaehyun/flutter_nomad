@@ -11,19 +11,26 @@ class HomeScreen extends StatelessWidget {
   final Future<List<NowPlayingModel>> nowPlayingMovies = ApiService.getNowPlaying();
   final Future<List<ComingSoonModel>> comingSoon = ApiService.getComingSoon();
 
+  TextStyle mainTitleStyle = const TextStyle(
+    fontWeight: FontWeight.bold,
+    fontSize: 26,
+    color: Colors.black,
+  );
+
+  TextStyle movieTitleStyle = TextStyle(
+    fontWeight: FontWeight.w600,
+    color: Colors.black.withOpacity(0.6),
+  );
+
   @override
   Widget build(BuildContext context) {
-    TextStyle textStyle = TextStyle(
-      fontWeight: FontWeight.bold,
-      fontSize: 26,
-      color: Colors.black.withOpacity(0.6),
-    );
+    final screenSize = MediaQuery.of(context).size;
 
     return SafeArea(
       child: Scaffold(
         body: SingleChildScrollView(
           child: SizedBox(
-            height: 900,
+            height: screenSize.height * 1.15,
             child: Padding(
               padding: const EdgeInsets.all(16.0),
               child: Column(
@@ -34,7 +41,7 @@ class HomeScreen extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('Popular Movies', style: textStyle),
+                        Text('Popular Movies', style: mainTitleStyle),
                         futurePopular(),
                       ],
                     ),
@@ -46,7 +53,7 @@ class HomeScreen extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('Now In Cinemas', style: textStyle),
+                        Text('Now In Cinemas', style: mainTitleStyle),
                         futureNowPlaying(),
                       ],
                     ),
@@ -58,7 +65,7 @@ class HomeScreen extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('Coming soon', style: textStyle),
+                        Text('Coming soon', style: mainTitleStyle),
                         Expanded(child: futureComingSoon()),
                       ],
                     ),
@@ -105,7 +112,7 @@ class HomeScreen extends StatelessWidget {
                         child: Image.network('https://image.tmdb.org/t/p/w500/${snapshot.data![index].posterPath}'),
                       ),
                     ),
-                    Text('${snapshot.data![index].title}', style: TextStyle(fontWeight: FontWeight.w600, color: Colors.black.withOpacity(0.6))),
+                    Text('${snapshot.data![index].title}',),
                   ],
                 ),
               );
@@ -156,10 +163,7 @@ class HomeScreen extends StatelessWidget {
                       child: Text(
                         overflow: TextOverflow.ellipsis,
                         '${snapshot.data![index].title}',
-                        style: TextStyle(
-                          fontWeight: FontWeight.w600,
-                          color: Colors.black.withOpacity(0.6),
-                        ),
+                        style: movieTitleStyle
                       ),
                     ),
                   ],
@@ -197,7 +201,7 @@ class HomeScreen extends StatelessWidget {
             itemBuilder: (context, index) {
               if (snapshot.hasData) {
                 return Container(
-                  width: 280,
+                  width: 290,
                   clipBehavior: Clip.hardEdge,
                   decoration: BoxDecoration(borderRadius: BorderRadius.circular(15)),
                   // note: 이미지 꽉 채우기 - fit: BoxFit.fill

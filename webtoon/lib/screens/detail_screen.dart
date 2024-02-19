@@ -28,8 +28,8 @@ class _DetailScreenState extends State<DetailScreen> {
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
     // 화면 너비와 높이에 따라 자동으로 위치를 계산
-    final double topPosition = screenSize.height; // 화면 높이의 20% 위치에 배치
-    final double leftPosition = screenSize.width; // 화면 너비의 20% 위치에 배치
+    final double topPosition = screenSize.height;
+    final double leftPosition = screenSize.width;
 
     return Scaffold(
       appBar: AppBar(title: const Text('Back to list')),

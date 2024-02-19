@@ -41,10 +41,10 @@
 - [x] VSCode 최대 라인 변경: 180
 - [x] title이 thumb 영역 벗어나면 말줄임표 나타내기
 - [x] detail_screen: 여러 디바이스에 적용하기 위한 MediaQuery 처리
-- [ ] poular movies 가로 크기 늘리고, 세로 줄이면서 화면 늘어지지 않게 설정하기
-- [ ] 종류, title - 공통적으로 반복하는 style을 main에 작성하기
-- [ ] page 이동 시, Hero 위젯 사용하기
+- [x] popular movies 가로 크기 늘리기
+- [x] 종류, title - 중복하는 style을 main에 작성하기
 - [ ] 시스템 바 위치까지 배경으로 지정하는 방법
-- [ ] Buy ticket 버튼 크기 조정
 - [ ] 세부 페이지 글자색 안 보인다 - 글자색 변경 기능 만들기 (우측 상단에 버튼 만들고 글자색 검정/흰색 변경 기능 만들기)
+- [ ] Buy ticket 버튼 크기 조정
 - [ ] 별점 사이즈 줄이기
+- [ ] page 이동 시, Hero 위젯 사용하기
