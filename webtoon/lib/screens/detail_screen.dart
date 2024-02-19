@@ -7,7 +7,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 class DetailScreen extends StatefulWidget {
   // id, 이미지(todo: 불필요하면 추후 삭제하기), 제목, 별점 popularity?, 상영 시간 runtime,
   // note: 상위에서 받은 id 사용함
-  late var id;
+  late dynamic id;
 
   DetailScreen({super.key, required this.id});
 
@@ -26,15 +26,14 @@ class _DetailScreenState extends State<DetailScreen> {
 
   @override
   Widget build(BuildContext context) {
-    print(widget.id);
     return Scaffold(
-      appBar: AppBar(title: Text('Back to list')),
+      appBar: AppBar(title: const Text('Back to list')),
       body: FutureBuilder(
         future: detailInfo,
         builder: (context, AsyncSnapshot snapshot) {
           // note: FutureBuilder 이하에서 snapshot.connectionState == ConnectionState.waiting 처리해야 하는데, ListView 내 itemBuilder 이하에서 처리해서 로딩 기능이 실행 되지 않았다 !
           if (!snapshot.hasData) {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           }
 
           final snapshotData = snapshot.data!;
@@ -69,25 +68,32 @@ class _DetailScreenState extends State<DetailScreen> {
           var runTimeMin = 105 % 60;
 
           // note:
-          String production_companies = '';
+          String productionCompanies = '';
           for (var item in snapshotData.production_companies) {
-            production_companies += '${item['name']}, \n';
+            productionCompanies += '${item['name']}, \n';
           }
 
           return ListView.separated(
             itemCount: 1,
             separatorBuilder: (context, index) {
-              return SizedBox(width: 20);
+              return const SizedBox(width: 20);
             },
             itemBuilder: (context, index) {
               // note: 배경이미지 전체 채우기 - 이미지 높이 설정 후, BoxFit.cover 설정
               return Stack(
                 // final original_title, popularity, runtime, production_companies, overview;
                 children: [
-                  Image.network('https://image.tmdb.org/t/p/w500/${snapshotData!.poster_path}', fit: BoxFit.cover, height: 730),
+                  Image.network(
+                      'https://image.tmdb.org/t/p/w500/${snapshotData!.poster_path}',
+                      fit: BoxFit.cover,
+                      height: 730),
                   Positioned(
                     top: 200,
-                    child: Text('${snapshotData.original_title}', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 35)),
+                    child: Text('${snapshotData.original_title}',
+                        style: const TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 35)),
                   ),
                   // note: rating 기능
                   Positioned(
@@ -100,13 +106,13 @@ class _DetailScreenState extends State<DetailScreen> {
                       direction: Axis.horizontal,
                       allowHalfRating: true,
                       itemCount: 5,
-                      itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
-                      itemBuilder: (context, _) => Icon(
+                      itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
+                      itemBuilder: (context, _) => const Icon(
                         Icons.star,
                         color: Colors.amber,
                       ),
                       onRatingUpdate: (rating) {
-                        print(rating);
+                        debugPrint(rating as String?);
                       },
                     ),
                   ),
@@ -116,25 +122,37 @@ class _DetailScreenState extends State<DetailScreen> {
                       children: [
                         Text(
                           '${runTimeHour}h ${runTimeMin}min',
-                          style: TextStyle(fontWeight: FontWeight.w600, color: Colors.white.withOpacity(0.6), fontSize: 15),
+                          style: TextStyle(
+                              fontWeight: FontWeight.w600,
+                              color: Colors.white.withOpacity(0.6),
+                              fontSize: 15),
                         ),
-                        SizedBox(width: 20),
-                        Text('$production_companies', style: TextStyle(color: Colors.white.withOpacity(0.6), fontSize: 15), maxLines: 13),
+                        const SizedBox(width: 20),
+                        Text(productionCompanies,
+                            style: TextStyle(
+                                color: Colors.white.withOpacity(0.6),
+                                fontSize: 15),
+                            maxLines: 13),
                       ],
                     ),
                   ),
-                  Positioned(
+                  const Positioned(
                     top: 420,
                     child: Text(
                       'Storyline',
-                      style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white, fontSize: 30),
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                          fontSize: 30),
                     ),
                   ),
                   Positioned(
                     top: 470,
-                    child: Container(
+                    child: SizedBox(
                       width: MediaQuery.of(context).size.width * 0.9,
-                      child: Text('${snapshotData.overview}', style: TextStyle(color: Colors.white, fontSize: 18)),
+                      child: Text('${snapshotData.overview}',
+                          style: const TextStyle(
+                              color: Colors.white, fontSize: 18)),
                     ),
                   ),
                   Positioned(
@@ -153,9 +171,10 @@ class _DetailScreenState extends State<DetailScreen> {
                         onPressed: () {
                           // todo: 추후, 클릭 시, inapp 결제하기
                         },
-                        child: Text(
+                        child: const Text(
                           'Buy ticket',
-                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 20),
                         ),
                       ),
                     ),

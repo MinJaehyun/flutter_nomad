@@ -25,11 +25,12 @@ class ApiService {
   // note: getNowPlaying
   static Future<List<NowPlayingModel>> getNowPlaying() async {
     List<NowPlayingModel> nowPlayingList = [];
-    final url = Uri.parse('https://movies-api.nomadcoders.workers.dev/now-playing');
+    final url =
+        Uri.parse('https://movies-api.nomadcoders.workers.dev/now-playing');
     final response = await http.get(url);
-    if(response.statusCode == 200) {
+    if (response.statusCode == 200) {
       final nowPlaying = jsonDecode(response.body);
-      for(var item in nowPlaying['results']) {
+      for (var item in nowPlaying['results']) {
         nowPlayingList.add(NowPlayingModel.fromJson(item));
       }
 
@@ -42,12 +43,13 @@ class ApiService {
   // note: getComingSoonModel
   static Future<List<ComingSoonModel>> getComingSoon() async {
     List<ComingSoonModel> comingMovieInstances = [];
-    final url = Uri.parse('https://movies-api.nomadcoders.workers.dev/coming-soon');
+    final url =
+        Uri.parse('https://movies-api.nomadcoders.workers.dev/coming-soon');
     final response = await http.get(url);
 
-    if(response.statusCode == 200) {
+    if (response.statusCode == 200) {
       final Map<String, dynamic> comingSoonMovie = jsonDecode(response.body);
-      for(var item in comingSoonMovie['results']) {
+      for (var item in comingSoonMovie['results']) {
         comingMovieInstances.add(ComingSoonModel.fromJson(item));
       }
 
@@ -60,9 +62,10 @@ class ApiService {
   // note: getDetailInfo(id)
   static Future<DetailInfoModel> getDetailInfo(id) async {
     late DetailInfoModel detailInfo;
-    final url = Uri.parse('https://movies-api.nomadcoders.workers.dev/movie?id=${id}');
+    final url =
+        Uri.parse('https://movies-api.nomadcoders.workers.dev/movie?id=$id');
     final response = await http.get(url);
-    if(response.statusCode == 200){
+    if (response.statusCode == 200) {
       final Map<String, dynamic> jsonData = jsonDecode(response.body);
       detailInfo = DetailInfoModel.fromJson(jsonData);
     }

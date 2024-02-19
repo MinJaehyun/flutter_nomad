@@ -33,8 +33,10 @@
 - [x] *** detail_screen 접근 시, null 에러 발생 (긴급,중요) - FutureBuilder 이하에서 snapshot.connectionState == ConnectionState.waiting 처리해야 하는데, ListView 내 itemBuilder 이하에서 처리해서 로딩 기능이 실행 되지 않았다 !
 
 - [x] 블로그에는 print 담고, 깃허브에는 print 걷어내기
+- [x] const 추가 - VSCode 저장 시, 자동 추가 기능 적용하고, 모든 파일 적용하기
+- [x] Container 대신 SizedBox 적용하여 개선
+- [x] 모델 내 annotation 설정, camelcase로 변수명 개선
 - [ ] 폰트 수정
-- [ ] const 추가 - VSCode 자동 추가하기
 - [ ] title이 thumb 영역 벗어나면 자동 줄바꿈하도록 개선하기
 - [ ] 종류, title - 공통적으로 반복하는 style을 main에 작성하기
 - [ ] page 이동 시, Hero 위젯 사용하기

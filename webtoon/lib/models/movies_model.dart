@@ -1,39 +1,45 @@
 class PopularMovieModel {
-  final id, poster_path;
+  final dynamic id, posterPath;
 
   PopularMovieModel.fromJson(Map<String, dynamic> json)
       : id = json['id'],
-        poster_path = json['poster_path'];
+        posterPath = json['poster_path'];
 }
 
 class NowPlayingModel {
-  final id, poster_path, title;
+  final dynamic id, posterPath, title;
 
   NowPlayingModel.fromJson(Map<String, dynamic> json)
       : id = json['id'],
-        poster_path = json['poster_path'],
+        posterPath = json['poster_path'],
         title = json['title'];
 }
 
 class ComingSoonModel {
-  final id, poster_path, title;
+  final dynamic id, posterPath, title;
 
   ComingSoonModel.fromJson(Map<String, dynamic> json)
       : id = json['id'],
-        poster_path = json['poster_path'],
+        posterPath = json['poster_path'],
         title = json['title'];
 }
 
 class DetailInfoModel {
   // id, 이미지, 제목, 상영 시간 runtime, 제작사는 여러개 production_companies 내 [index] 내 [name] , 스토리라인 overview, vote_average: 별정
-  final id, poster_path, original_title, runtime, production_companies, overview, vote_average;
+  final dynamic id,
+      posterPath,
+      originalTitle,
+      runtime,
+      productionCompanies,
+      overview,
+      voteAverage;
 
   DetailInfoModel.fromJson(Map<String, dynamic> json)
       : id = json['id'],
-        poster_path = json['poster_path'],
-        original_title = json['original_title'],
+        posterPath = json['poster_path'],
+        originalTitle = json['original_title'],
         runtime = json['runtime'],
-        production_companies = json['production_companies'],
+        productionCompanies = json['production_companies'],
         overview = json['overview'],
-        vote_average = json['vote_average'];
+        voteAverage = json['vote_average'];
 }
