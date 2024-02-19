@@ -32,7 +32,8 @@ class _DetailScreenState extends State<DetailScreen> {
     final double leftPosition = screenSize.width;
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Back to list')),
+      extendBodyBehindAppBar: true,
+      appBar: renderAppBar(context),
       body: FutureBuilder(
         future: detailInfo,
         builder: (context, AsyncSnapshot snapshot) {
@@ -78,18 +79,29 @@ class _DetailScreenState extends State<DetailScreen> {
             productionCompanies += '${item['name']}, \n';
           }
 
-          return ListView.builder(
-            itemCount: 1,
-            itemBuilder: (context, index) {
+          return ListView(
+            children: [
               // note: 배경이미지 전체 채우기 - 이미지 높이 설정 후, BoxFit.cover 설정
-              return Stack(
-                // final original_title, popularity, runtime, production_companies, overview;
+              Stack(
                 children: [
-                  Image.network('https://image.tmdb.org/t/p/w500/${snapshotData!.posterPath}', fit: BoxFit.cover, height: 730),
+                  Positioned(
+                    child: Container(
+                      height: 800,
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: NetworkImage(
+                            'https://image.tmdb.org/t/p/w500/${snapshotData!.posterPath}',
+                          ),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
+                  ),
                   Positioned(
                     top: topPosition * 0.2,
                     left: leftPosition * 0.05,
-                    child: Text('${snapshotData.originalTitle}', style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 35)),
+                    child:
+                        Text('${snapshotData.originalTitle}', style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 35)),
                   ),
                   // note: rating 기능
                   Positioned(
@@ -167,10 +179,26 @@ class _DetailScreenState extends State<DetailScreen> {
                     ),
                   ),
                 ],
-              );
-            },
+              ),
+            ],
           );
         },
+      ),
+    );
+  }
+
+  AppBar renderAppBar(BuildContext context) {
+    return AppBar(
+      backgroundColor: Colors.transparent,
+      elevation: 0,
+      title: const Text(
+        'Back to list',
+        style: TextStyle(color: Colors.blue),
+      ),
+      leading: IconButton(
+        onPressed: () => Navigator.pop(context),
+        color: Colors.blue,
+        icon: const Icon(Icons.arrow_back_ios_new_outlined),
       ),
     );
   }
