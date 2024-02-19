@@ -7,7 +7,8 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 class DetailScreen extends StatefulWidget {
   // id, 이미지(todo: 불필요하면 추후 삭제하기), 제목, 별점 popularity?, 상영 시간 runtime,
   // 제작사: 여러개 production_companies 내 [index] 내 [name] , 스토리라인 overview
-  late final id; // note: 상위에서 받은 id 사용해야 한다
+  // note: 상위에서 받은 id 사용함
+  late var id;
 
   DetailScreen({super.key, required this.id});
 
@@ -32,6 +33,11 @@ class _DetailScreenState extends State<DetailScreen> {
       body: FutureBuilder(
         future: detailInfo,
         builder: (context, AsyncSnapshot snapshot) {
+          // note: FutureBuilder 이하에서 snapshot.connectionState == ConnectionState.waiting 처리해야 하는데, ListView 내 itemBuilder 이하에서 처리해서 로딩 기능이 실행 되지 않았다 !
+          if (!snapshot.hasData) {
+            return Center(child: CircularProgressIndicator());
+          }
+
           final snapshotData = snapshot.data!;
           final average = snapshotData.vote_average / 2;
           late double showAverage = 0;
@@ -75,9 +81,7 @@ class _DetailScreenState extends State<DetailScreen> {
               return SizedBox(width: 20);
             },
             itemBuilder: (context, index) {
-              if (snapshot.hasData == null || snapshot.connectionState == ConnectionState.waiting) {
-                return Center(child: CircularProgressIndicator());
-              }
+
               // note: 배경이미지 전체 채우기 - 이미지 높이 설정 후, BoxFit.cover 설정
               return Stack(
                 // final original_title, popularity, runtime, production_companies, overview;

@@ -29,8 +29,10 @@
 ## 개선할 점
 - [x] 이미지 화면에 꽉 채우기
 - [x] Stack 및 Positioned 위젯 사용하여 이미지 위에 글자 띄우기
-- [ ] 최초 로딩 시, null 에러 발생 (긴급,중요)
-- [ ] home_screen 최초 앱 실행 시, null 발생하는 에러 해결하기 (긴급,중요) 
+
+- [x] home_screen 최초 앱 실행 시, null 발생하는 에러 해결하기 (긴급,중요) 
+- [x] *** detail_screen 접근 시, null 에러 발생 (긴급,중요) - FutureBuilder 이하에서 snapshot.connectionState == ConnectionState.waiting 처리해야 하는데, ListView 내 itemBuilder 이하에서 처리해서 로딩 기능이 실행 되지 않았다 !
+
 - [ ] 블로그에는 print 담고, 깃허브에는 print 걷어내기
 - [ ] 폰트 수정
 - [ ] const 추가 - VSCode 자동 추가하기
@@ -41,3 +43,8 @@
 - [ ] 별점 사이즈 줄이기
 - [ ] Buy ticket 버튼 크기 조정
 - [ ] storyline 내용 5줄이상이면 스크롤 넣기
+
+
+초기화 시, null 발생!
+FutureBuilder<List<PopularMovieModel>>
+Null check operator used on a null value

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:webtoon/screens/detail_screen.dart';
 import 'package:webtoon/screens/home_screen.dart';
 
 void main() {

@@ -57,6 +57,7 @@ class ApiService {
     throw Error();
   }
 
+  // note: getDetailInfo(id)
   static Future<DetailInfoModel> getDetailInfo(id) async {
     late DetailInfoModel detailInfo;
     final url = Uri.parse('https://movies-api.nomadcoders.workers.dev/movie?id=${id}');
