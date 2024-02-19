@@ -17,11 +17,20 @@ class DetailScreen extends StatefulWidget {
 
 class _DetailScreenState extends State<DetailScreen> {
   late Future<void> detailInfo;
+  List<Color> appBarColor = [Colors.white, Colors.red];
+  // Color currentColor = Colors.white;
 
   @override
   void initState() {
     super.initState();
     detailInfo = ApiService.getDetailInfo(widget.id);
+  }
+
+  // note: 우측 상단 클릭하면 배경 글자색 검정/흰색으로 변경
+  onChangedColor() {
+    setState(() {
+      appBarColor.insert(1, appBarColor.removeAt(0));
+    });
   }
 
   @override
@@ -97,8 +106,7 @@ class _DetailScreenState extends State<DetailScreen> {
               Positioned(
                 top: topPosition * 0.2,
                 left: leftPosition * 0.05,
-                child:
-                    Text('${snapshotData.originalTitle}', style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 35)),
+                child: Text('${snapshotData.originalTitle}', style: TextStyle(color: appBarColor[0], fontWeight: FontWeight.bold, fontSize: 35)),
               ),
               // note: rating 기능
               Positioned(
@@ -129,19 +137,19 @@ class _DetailScreenState extends State<DetailScreen> {
                   children: [
                     Text(
                       '${runTimeHour}h ${runTimeMin}min',
-                      style: TextStyle(fontWeight: FontWeight.w600, color: Colors.white.withOpacity(0.6), fontSize: 15),
+                      style: TextStyle(fontWeight: FontWeight.w600, color: appBarColor[0].withOpacity(0.6), fontSize: 15),
                     ),
                     const SizedBox(width: 20),
-                    Text(productionCompanies, style: TextStyle(color: Colors.white.withOpacity(0.6), fontSize: 15), maxLines: 13),
+                    Text(productionCompanies, style: TextStyle(color: appBarColor[0].withOpacity(0.6), fontSize: 15), maxLines: 13),
                   ],
                 ),
               ),
               Positioned(
                 top: topPosition * 0.46,
                 left: leftPosition * 0.05,
-                child: const Text(
+                child: Text(
                   'Storyline',
-                  style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white, fontSize: 30),
+                  style: TextStyle(fontWeight: FontWeight.bold, color: appBarColor[0], fontSize: 30),
                 ),
               ),
               Positioned(
@@ -149,7 +157,7 @@ class _DetailScreenState extends State<DetailScreen> {
                 left: leftPosition * 0.05,
                 child: SizedBox(
                   width: MediaQuery.of(context).size.width * 0.9,
-                  child: Text('${snapshotData.overview}', style: const TextStyle(color: Colors.white, fontSize: 18)),
+                  child: Text('${snapshotData.overview}', style: TextStyle(color: appBarColor[0], fontSize: 18)),
                 ),
               ),
               Positioned(
@@ -186,15 +194,21 @@ class _DetailScreenState extends State<DetailScreen> {
     return AppBar(
       backgroundColor: Colors.transparent,
       elevation: 0,
-      title: const Text(
+      title: Text(
         'Back to list',
-        style: TextStyle(color: Colors.blue),
+        style: TextStyle(color: appBarColor[0]),
       ),
       leading: IconButton(
         onPressed: () => Navigator.pop(context),
-        color: Colors.blue,
+        color: appBarColor[0],
         icon: const Icon(Icons.arrow_back_ios_new_outlined),
       ),
+      actions: [
+        IconButton(
+          onPressed: onChangedColor,
+          icon: Icon(Icons.change_circle, color: appBarColor[0]),
+        ),
+      ],
     );
   }
 }
