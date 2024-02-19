@@ -70,8 +70,8 @@ class _DetailScreenState extends State<DetailScreen> {
                                                   : showAverage = 0;
 
           // note:
-          var runTimeHour = 105 ~/ 60;
-          var runTimeMin = 105 % 60;
+          var runTimeHour = snapshotData.runtime ~/ 60;
+          var runTimeMin = snapshotData.runtime % 60;
 
           // note:
           String productionCompanies = '';
