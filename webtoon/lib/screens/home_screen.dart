@@ -24,7 +24,6 @@ class HomeScreen extends StatelessWidget {
         body: SingleChildScrollView(
           child: Container(
             height: 900,
-            // width: 800,
             child: Padding(
               padding: const EdgeInsets.all(16.0),
               child: Column(
@@ -56,15 +55,11 @@ class HomeScreen extends StatelessWidget {
                   // note: Coming soon
                   Container(
                     height: 250,
-                    // width: 111,
-                    // decoration: BoxDecoration(color: Colors.grey),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text('Coming soon', style: textStyle),
-                        Expanded(
-                          child: futureComingSoon(),
-                        ),
+                        Expanded(child: futureComingSoon()),
                       ],
                     ),
                   ),
@@ -89,7 +84,7 @@ class HomeScreen extends StatelessWidget {
         } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
           return Text('데이터 없음');
         }
-          return ListView.separated(
+        return ListView.separated(
           scrollDirection: Axis.horizontal,
           itemCount: snapshot.data!.length, // ['results']
           separatorBuilder: (context, index) {

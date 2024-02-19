@@ -6,7 +6,6 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class DetailScreen extends StatefulWidget {
   // id, 이미지(todo: 불필요하면 추후 삭제하기), 제목, 별점 popularity?, 상영 시간 runtime,
-  // 제작사: 여러개 production_companies 내 [index] 내 [name] , 스토리라인 overview
   // note: 상위에서 받은 id 사용함
   late var id;
 
@@ -81,7 +80,6 @@ class _DetailScreenState extends State<DetailScreen> {
               return SizedBox(width: 20);
             },
             itemBuilder: (context, index) {
-
               // note: 배경이미지 전체 채우기 - 이미지 높이 설정 후, BoxFit.cover 설정
               return Stack(
                 // final original_title, popularity, runtime, production_companies, overview;
@@ -129,11 +127,7 @@ class _DetailScreenState extends State<DetailScreen> {
                     top: 420,
                     child: Text(
                       'Storyline',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                        fontSize: 30,
-                      ),
+                      style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white, fontSize: 30),
                     ),
                   ),
                   Positioned(
@@ -153,12 +147,16 @@ class _DetailScreenState extends State<DetailScreen> {
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8),
                           ),
+                          // error: 사이즈 조정 안되는 이유?
                           // maximumSize: Size(100, 35),
                         ),
                         onPressed: () {
-                          // 추후, 클릭 시, inapp 결제하기
+                          // todo: 추후, 클릭 시, inapp 결제하기
                         },
-                        child: Text('Buy ticket', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
+                        child: Text(
+                          'Buy ticket',
+                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                        ),
                       ),
                     ),
                   ),
