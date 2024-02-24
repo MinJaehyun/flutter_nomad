@@ -2,7 +2,8 @@
 
 ## 앱 실행 시, 흐름도
 1. main.dart => home_screen.dart => api_services.dart => model.dart
-2. 위 흐름과 반대로 코드 작성하기
+2. 임시 데이터 넣어서 기본 UI 구현
+3. 위 흐름과 반대로 코드 작성하기
 
 
 ## 파일별 기능
@@ -19,3 +20,4 @@
 4. main.dart
 - home_screen.dart 호출하기
 
+[//]: # ('https://movies-api.nomadcoders.workers.dev/popular')

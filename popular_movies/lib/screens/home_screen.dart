@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:popular_movies/services/api_serviece.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+  HomeScreen({super.key});
+
+  final data = ApiService.getPopularMovies();
 
   @override
   Widget build(BuildContext context) {
