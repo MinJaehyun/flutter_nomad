@@ -39,6 +39,20 @@ class ComingSoonMovies {
         title = parsingData['title'];
 }
 
+// note: movie: https://movies-api.nomadcoders.workers.dev/movie?id=866398
+class DetailMovie {
+  final int id;
+  final String posterPath, title, voteAverage, runtime, productionCompanies;
+
+  DetailMovie.fromJson(Map<String, dynamic> parsingData)
+      : id = parsingData['id'],
+        posterPath = parsingData['poster_path'],
+        title = parsingData['title'],
+        voteAverage = parsingData['vote_average'],
+        runtime = parsingData['runtime'],
+        productionCompanies = parsingData['production_companies'];
+}
+
 /* 참고: https://docs.flutter.dev/data-and-backend/serialization/json
 User(this.name, this.email);
 
@@ -51,4 +65,3 @@ User(this.name, this.email);
         'email': email,
       };
 * */
-

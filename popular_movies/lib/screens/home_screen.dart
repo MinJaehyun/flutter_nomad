@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:popular_movies/models/movies_model.dart';
+import 'package:popular_movies/screens/detail_screen.dart';
 import 'package:popular_movies/services/api_service.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -42,7 +43,7 @@ class HomeScreen extends StatelessWidget {
   FutureBuilder<List<ComingSoonMovies>> renderComingSoon(TextStyle subjectText) {
     return FutureBuilder(
       future: comingSoonMovies,
-      builder: (context, snapshot) {
+      builder: (context, AsyncSnapshot snapshot) {
         if (!snapshot.hasData) {
           return Center(child: CircularProgressIndicator());
         }
@@ -58,7 +59,19 @@ class HomeScreen extends StatelessWidget {
                   return SizedBox(width: 15);
                 },
                 itemBuilder: (context, index) {
-                  return Image.network('https://image.tmdb.org/t/p/w500${snapshot.data![index].posterPath}');
+                  return GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (_) {
+                            // 866398
+                            return DetailScreen(id: int.parse('${snapshot.data![index].id}'));
+                          },
+                        ),
+                      );
+                    },
+                    child: Image.network('https://image.tmdb.org/t/p/w500${snapshot.data![index].posterPath}'),
+                  );
                 },
               ),
             ),

@@ -36,3 +36,8 @@ NetworkImage("https://movies-api.nomadcoders.workers.dev/popular/hu40Uxp9WtpL34j
 
 3. 문제점: FutureBuilder 내 ListView 위,아래에 어디에 snapshot.data로 로딩 호출한 지점 확인하기
 해결: snapshot.data 아닌 snapshot.hasData로 유무 판별해야 한다.
+
+4. 문제점: 클릭한 대상의 상세 정보를 어느 페이지에서 가져올 것인지?
+해결: detail screen에서의 상세 정보는 id를 활용해서 관련 내용을 가져와야 한다.
+
+5. 

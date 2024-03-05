@@ -54,6 +54,24 @@ class ApiService {
 
     throw Error();
   }
+
+  // note: get detail page api
+  static Future<DetailMovie> getDetailMovie(int id) async {
+    final url = Uri.parse('https://movies-api.nomadcoders.workers.dev/movie?id=$id');
+    final response = await http.get(url);
+    final DetailMovie detailInfo;
+
+    if(response.statusCode == 200) {
+      final Map<String, dynamic> parsingData = jsonDecode(response.body);
+      detailInfo = DetailMovie.fromJson(parsingData);
+
+      return detailInfo;
+    }
+
+    throw Error();
+  }
+
+
 }
 
 /* 참고: https://docs.flutter.dev/cookbook/networking/fetch-data
