@@ -64,8 +64,9 @@ class HomeScreen extends StatelessWidget {
                       Navigator.of(context).push(
                         MaterialPageRoute(
                           builder: (_) {
-                            // 866398
-                            return DetailScreen(id: int.parse('${snapshot.data![index].id}'));
+                            // print('${snapshot.data![index].id}'.runtimeType); // String ***
+                            // 866398, DetailScreen
+                            return DetailScreen(id: '${snapshot.data![index].id}');
                           },
                         ),
                       );

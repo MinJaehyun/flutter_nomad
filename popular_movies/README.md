@@ -40,4 +40,6 @@ NetworkImage("https://movies-api.nomadcoders.workers.dev/popular/hu40Uxp9WtpL34j
 4. 문제점: 클릭한 대상의 상세 정보를 어느 페이지에서 가져올 것인지?
 해결: detail screen에서의 상세 정보는 id를 활용해서 관련 내용을 가져와야 한다.
 
-5. 
+5. 문제점: Detail page API 호출 불가.
+과정: 에러 메시지를 나타내지 않으므로, home -> ... -> model 까지 거슬러 올라가며 데이터 받는 부분을 print 함.
+해결: json data의 id 값은 int 형이므로, model.dart 내 멤버 변수는 final int id로 지정해야 한다. (json data 의 id 값은 반드시 String이 아니여도 된다. 즉, 숫자 타입 사용 가능하다)
